@@ -20,6 +20,8 @@ def main() -> None:
         raise SystemExit("excuse.txt is empty")
     if "\n" in line or "\r" in line:
         raise SystemExit("excuse must be a single line")
+    if any(ord(ch) < 0x20 and ch != "\t" for ch in line):
+        raise SystemExit("excuse contains a control character")
     if len(line) > MAX_CHARS:
         raise SystemExit(
             f"excuse is {len(line)} characters, over the {MAX_CHARS} limit"
